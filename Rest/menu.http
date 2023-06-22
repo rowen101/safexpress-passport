@@ -1,0 +1,4 @@
+
+GET http://127.0.0.1:8000/api/menu HTTP/1.1
+content-type: application/json
+Authorization: Bearer 3|N8LmAB0WdKW8N2mshL3C3Gvw4PFnrrgd3zwYNDUY
