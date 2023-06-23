@@ -60,8 +60,7 @@ export default {
             await axios.get('/sanctum/csrf-cookie')
             await axios.post('/api/login',this.auth)
             .then(({data})=>{
-                localStorage.setItem("token", data.token);
-                this.signIn()
+               this.signIn(this.auth)
             }).catch(({response})=>{
                 if(response.status===422){
                     this.validationErrors = response.data.errors

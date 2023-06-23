@@ -21,12 +21,18 @@ export default {
         },
         SET_USER (state, value) {
             state.user = value
-        }
+        },
+        SET_TOKEN (state, token){
+            localStorage.setItem("auth", token);
+            state.token = token;
+        },
+
     },
     actions:{
-        login({commit}){
-            return axios.get('/api/user').then(({data})=>{
-                commit('SET_USER',data)
+        login({commit},uparam){
+            return axios.post('/api/login',uparam).then(({data})=>{
+                commit('SET_USER',data.user)
+                commit('SET_TOKEN',data.token)
                 commit('SET_AUTHENTICATED',true)
                 router.push({name:'dashboard'})
             }).catch(({response:{data}})=>{
@@ -34,6 +40,7 @@ export default {
                 commit('SET_AUTHENTICATED',false)
             })
         },
+
         logout({commit}){
             commit('SET_USER',{})
             commit('SET_AUTHENTICATED',false)
